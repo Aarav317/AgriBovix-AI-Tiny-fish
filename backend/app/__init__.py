@@ -1,0 +1,1 @@
+"""AgriBovix application package."""

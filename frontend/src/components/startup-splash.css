@@ -1,0 +1,135 @@
+.startup-splash {
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #e9f1be;
+  color: #314c3b;
+  opacity: 1;
+  transition: opacity 750ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.startup-splash.is-exiting {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.startup-splash__composition {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(100% - 32px, 520px);
+  text-align: center;
+  transform: translateY(-1.5vh);
+}
+
+.startup-splash__logo {
+  display: block;
+  width: clamp(280px, 42vw, 460px);
+  height: auto;
+  max-width: 100%;
+  margin-bottom: -38px;
+  object-fit: contain;
+  opacity: 0;
+  clip-path: inset(50% 50% 50% 50% round 50%);
+  transform: scale(0.94);
+  animation: startup-logo-reveal 3000ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  user-select: none;
+}
+
+.startup-splash__brand {
+  color: #314c3b;
+  font-size: clamp(37px, 6vw, 50px);
+  font-weight: 650;
+  letter-spacing: -0.055em;
+  line-height: 1.08;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: startup-text-reveal 2000ms cubic-bezier(0.22, 1, 0.36, 1) 3000ms
+    both;
+}
+
+.startup-splash__powered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin-top: 21px;
+  color: #4c6b55;
+  opacity: 0;
+  transform: translateY(7px);
+  animation: startup-text-reveal 1000ms cubic-bezier(0.22, 1, 0.36, 1) 5000ms
+    both;
+}
+
+.startup-splash__powered span {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+}
+
+.startup-splash__powered strong {
+  color: #314c3b;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+@keyframes startup-logo-reveal {
+  0% {
+    clip-path: inset(50% 50% 50% 50% round 50%);
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  18% {
+    opacity: 1;
+  }
+  100% {
+    clip-path: inset(0);
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes startup-text-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .startup-splash__composition {
+    transform: translateY(-1vh);
+  }
+
+  .startup-splash__logo {
+    width: clamp(235px, 74vw, 300px);
+    margin-bottom: -29px;
+  }
+
+  .startup-splash__powered {
+    margin-top: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .startup-splash {
+    transition: none;
+  }
+
+  .startup-splash__logo,
+  .startup-splash__brand,
+  .startup-splash__powered {
+    clip-path: none;
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
